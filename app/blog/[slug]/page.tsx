@@ -1,3 +1,6 @@
+"use server";
+export const runtime = "edge";
+
 import { notFound } from "next/navigation";
 import { getClient } from "@/app/lib/client";
 import { gql } from "@apollo/client";
@@ -48,6 +51,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     variables: {
       slug: params.slug,
     },
+    context: {},
   });
 
   if (!data.post) notFound();
