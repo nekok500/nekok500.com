@@ -1,12 +1,16 @@
+"use client";
+
 import { getClient } from "@/app/lib/client";
 import { gql } from "@apollo/client";
-import { notFound } from "next/navigation";
+
+export const runtime = "edge";
 
 export async function generateStaticParams() {
   const client = getClient();
   const { data } = await client.query<{
     launches: {
       id: string;
+      mission_name: string;
     }[];
   }>({
     query: gql`
@@ -18,18 +22,14 @@ export async function generateStaticParams() {
     `,
   });
 
-  console.log(data);
-
-  const paths = data.launches.map((launch) => ({
-    slug: launch.id,
-  }));
-
-  console.log(paths);
-
-  return [...paths];
+  return data.launches.map((launch) => {
+    slug: launch.id;
+  });
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
+  console.log("generating");
+
   const client = getClient();
   const { data } = await client.query<{
     launch: {
@@ -45,12 +45,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         }
       }
     `,
-    variables: {
-      id: params.slug,
-    },
   });
-
-  if (!data.launch) notFound();
 
   return (
     <div className="mx-auto py-6">
