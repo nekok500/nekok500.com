@@ -8,11 +8,11 @@ import Footer from "./_components/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "nekok500.com",
+  title: {
+    template: "%s - nekok500.com",
+    default: "nekok500.com",
+  },
   description: "ねこかわいいのポートフォリオ的ななにか",
-  // twitter: {
-  //   creator: "@nekok500",
-  // },
 };
 
 export default function RootLayout({
@@ -25,8 +25,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <div className="px-4 py-6 xl:max-w-4xl mx-auto flex flex-col min-h-screen flex-grow">
-              <Header />
-              <main className="py-6">{children}</main>
+            <Header />
+            <main className="py-6">{children}</main>
           </div>
           <Footer />
         </Providers>

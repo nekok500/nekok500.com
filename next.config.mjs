@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "development") {
 const nextConfig = {
   images: {
     loader: "custom",
-    loaderFile: "./app/loader.ts",
+    loaderFile: "./libs/loader.ts",
     domains: ["avatars.githubusercontent.com", "cdn.discordapp.com"],
   },
 };

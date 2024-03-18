@@ -4,4 +4,5 @@ interface CloudflareEnv {
   //
   // KV Example:
   // MY_KV: KVNamespace
+  MICROCMS_API_KEY: string;
 }

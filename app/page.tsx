@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ReactNode, useState } from "react";
 import { FaGithub, FaTwitter, FaDiscord, FaPython } from "react-icons/fa";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import Link from "next/link";
 
 function Card({
   title,
@@ -61,7 +62,7 @@ function ProjectCard({
   link?: string;
 }) {
   return (
-    <a href={link}>
+    <Link href={link || "#"}>
       <div className="m-2 p-3 shadow my-2 border border-gray-300 rounded-lg">
         <h5 className="text-xl font-medium leading-tight text-gray-900 dark:text-gray-100 flex items-center">
           {title}
@@ -84,7 +85,7 @@ function ProjectCard({
           <p className="mt-4 overflow-ellipsis overflow-hidden">{link}</p>
         )}
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -138,7 +139,6 @@ export default function Home() {
 
       <ul className="my-3 flex mx-auto justify-center text-4xl">
         {links.map((link) => {
-
           return (
             <li key={link.platform}>
               <Popover
