@@ -1,4 +1,4 @@
-import { Blog, Category, Tag, client } from "@/libs/microcms";
+import { Blog, Category, client } from "@/libs/microcms";
 import BlogList from "../../_components/list";
 import { FaAlignLeft } from "react-icons/fa";
 import { Metadata } from "next";
@@ -11,13 +11,13 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const tag = await client.getListDetail<Category>({
+  const category = await client.getListDetail<Category>({
     endpoint: "categories",
     contentId: params.slug,
   });
 
   return {
-    title: `${tag.name} の記事一覧`,
+    title: `${category.name} の記事一覧`,
   };
 }
 
@@ -26,17 +26,21 @@ export default async function ListByCategoryPage({
 }: {
   params: { slug: string };
 }) {
-  const tag = await client.getListDetail<Category>({
+  const category = await client.getListDetail<Category>({
     endpoint: "categories",
     contentId: params.slug,
   });
   const posts = await client.getList<Blog>({
     endpoint: "blogs",
-    queries: { filters: `category[equals]${tag.id}` },
+    queries: { filters: `category[equals]${category.id}` },
   });
 
   return (
-    <BlogList name={tag.name} icon={<FaAlignLeft />} posts={posts.contents} />
+    <BlogList
+      name={category.name}
+      icon={<FaAlignLeft />}
+      posts={posts.contents}
+    />
   );
 }
 
