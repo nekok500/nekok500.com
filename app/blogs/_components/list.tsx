@@ -27,6 +27,9 @@ export default function BlogList({
       </h1>
       <div className="mt-2 grid">
         {posts.map((post) => {
+          if (post.visible === false)
+            return
+
           const slug = `${post
             .publishedAt!.split("T")[0]
             .replaceAll("-", "")}-${post.id}`;

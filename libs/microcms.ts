@@ -16,6 +16,7 @@ export type Blog = {
   tags?: Tag[];
   category: Category;
   description?: string;
+  visible?: boolean;
 } & MicroCMSDate;
 
 export type Category = {
