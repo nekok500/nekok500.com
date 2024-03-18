@@ -24,13 +24,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <div className="px-4 py-6 xl:max-w-4xl mx-auto flex flex-col min-h-screen">
-            <div className="flex-grow">
+          <div className="px-4 py-6 xl:max-w-4xl mx-auto flex flex-col min-h-screen flex-grow">
               <Header />
               <main className="py-6">{children}</main>
-            </div>
-            <Footer />
           </div>
+          <Footer />
         </Providers>
       </body>
     </html>
