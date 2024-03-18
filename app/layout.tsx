@@ -1,30 +1,19 @@
 import "./globals.css";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Providers } from "./_components/provider";
+import Header from "./_components/header";
+import Footer from "./_components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "(WIP) nekok500.com",
+export const metadata: Metadata = {
+  title: "nekok500.com",
   description: "ねこかわいいのポートフォリオ的ななにか",
+  // twitter: {
+  //   creator: "@nekok500",
+  // },
 };
-
-function Header() {
-  return (
-    <header>
-      <nav className="flex mx-auto items-center justify-between">
-        <a className="text-2xl text-gray-900" href="/">
-          nekok500.com
-        </a>
-        <a className="font-semibold text-gray-900" href="/blog">
-          ブログ
-        </a>
-        <a className="font-semibold text-gray-900" href="/projects">
-          プロジェクト
-        </a>
-      </nav>
-    </header>
-  );
-}
 
 export default function RootLayout({
   children,
@@ -34,10 +23,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="px-4 py-6 xl:max-w-4xl mx-auto">
-          <Header></Header>
-          {children}
-        </main>
+        <Providers>
+          <div className="px-4 py-6 xl:max-w-4xl mx-auto flex flex-col min-h-screen">
+            <div className="flex-grow">
+              <Header />
+              <main className="py-6">{children}</main>
+            </div>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );
