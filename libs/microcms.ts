@@ -1,9 +1,11 @@
 import { MicroCMSDate, MicroCMSImage, createClient } from "microcms-js-sdk";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getOptionalRequestContext } from "@cloudflare/next-on-pages";
 
 export const client = createClient({
   serviceDomain: "nekok500-com",
-  apiKey: getRequestContext().env.MICROCMS_API_KEY,
+  apiKey:
+    getOptionalRequestContext()?.env.MICROCMS_API_KEY ||
+    process.env.MICROCMS_API_KEY!, // generateStaticParamsの時に詰む対策
 });
 
 export type Blog = {
