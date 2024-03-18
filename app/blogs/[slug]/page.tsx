@@ -51,7 +51,11 @@ export async function generateMetadata({
   }
 }
 
-export default async function Blog({ params }: { params: { slug: string } }) {
+export default async function BlogPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await client.getListDetail<Blog>({
     endpoint: "blogs",
     contentId: getSlug(params.slug),

@@ -118,7 +118,7 @@ const links = [
   },
 ];
 
-export default function Home() {
+export default function HomePage() {
   const [hoverItem, setHoverItem] = useState("");
 
   return (

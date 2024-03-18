@@ -21,7 +21,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ListByTag({
+export default async function ListByTagPage({
   params,
 }: {
   params: { slug: string };
