@@ -25,10 +25,16 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post = await client.getListDetail<Blog>({
-    endpoint: "blogs",
-    contentId: getSlug(params.slug),
-  });
+  const post = await client
+    .getListDetail<Blog>({
+      endpoint: "blogs",
+      contentId: getSlug(params.slug),
+    })
+    .catch((e: Error) => {
+      if (e.message.includes("404")) return notFound();
+
+      throw e;
+    });
 
   if (post.eyecatch) {
     return {
@@ -56,12 +62,16 @@ export default async function BlogPage({
 }: {
   params: { slug: string };
 }) {
-  const post = await client.getListDetail<Blog>({
-    endpoint: "blogs",
-    contentId: getSlug(params.slug),
-  });
+  const post = await client
+    .getListDetail<Blog>({
+      endpoint: "blogs",
+      contentId: getSlug(params.slug),
+    })
+    .catch((e: Error) => {
+      if (e.message.includes("404")) return notFound();
 
-  if (!post) return notFound();
+      throw e;
+    });
 
   const $ = load(post.content);
   $("pre code").each((_, elm) => {
@@ -115,16 +125,16 @@ export default async function BlogPage({
   );
 }
 
-export async function generateStaticParams() {
-  const { contents } = await client.getList<Blog>({
-    endpoint: "blogs",
-  });
+// export async function generateStaticParams() {
+//   const { contents } = await client.getList<Blog>({
+//     endpoint: "blogs",
+//   });
 
-  const paths = contents.map((post) => {
-    return {
-      slug: post.id,
-    };
-  });
+//   const paths = contents.map((post) => {
+//     return {
+//       slug: post.id,
+//     };
+//   });
 
-  return [...paths];
-}
+//   return [...paths];
+// }
