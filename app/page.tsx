@@ -118,6 +118,8 @@ const links = [
 ];
 
 export default function Home() {
+  const [hoverItem, setHoverItem] = useState("");
+
   return (
     <div>
       <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
@@ -136,18 +138,17 @@ export default function Home() {
 
       <ul className="my-3 flex mx-auto justify-center text-4xl">
         {links.map((link) => {
-          const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
           return (
             <li key={link.platform}>
               <Popover
                 placement="bottom"
                 showArrow={true}
-                isOpen={isPopoverOpen}
+                isOpen={hoverItem === link.platform}
               >
                 <PopoverTrigger
-                  onMouseEnter={() => setIsPopoverOpen(true)}
-                  onMouseLeave={() => setIsPopoverOpen(false)}
+                  onMouseEnter={() => setHoverItem(link.platform)}
+                  onMouseLeave={() => setHoverItem("")}
                 >
                   <div className="mx-1">
                     <a href={link.href}>{link.icon}</a>
