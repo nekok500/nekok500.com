@@ -12,7 +12,12 @@ const nextConfig = {
   images: {
     loader: "custom",
     loaderFile: "./libs/loader.ts",
-    domains: ["avatars.githubusercontent.com", "cdn.discordapp.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 };
 

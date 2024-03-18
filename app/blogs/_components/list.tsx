@@ -4,6 +4,7 @@ import { toDateString } from "@/libs/utils";
 import { FaClock } from "react-icons/fa";
 import { ReactNode } from "react";
 import { Tags } from "./tags";
+import Image from "next/image";
 
 export default function BlogList({
   name,
@@ -53,7 +54,15 @@ export default function BlogList({
               {post.description && <p>{post.description}</p>}
 
               {post.eyecatch && (
-                <img className="mt-1 rounded-lg" src={post.eyecatch.url} />
+                <div className="flex justify-center items-center">
+                  <Image
+                    className="mt-2 rounded-lg"
+                    src={post.eyecatch.url}
+                    width={800}
+                    height={0}
+                    alt={"アイキャッチ"}
+                  />
+                </div>
               )}
             </div>
           );
