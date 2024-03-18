@@ -2,10 +2,16 @@
 
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  });
 
   return (
     <header>
@@ -29,16 +35,15 @@ export default function Header() {
           >
             プロジェクト
           </a> */}
-          <FaMoon
-            className="my-1"
-            data-hide-on-theme="light"
-            onClick={() => setTheme("light")}
-          />
-          <FaSun
-            className="my-1"
-            data-hide-on-theme="dark"
-            onClick={() => setTheme("dark")}
-          />
+          {isLoaded ? (
+            theme == "dark" ? (
+              <FaMoon className="my-1" onClick={() => setTheme("light")} />
+            ) : (
+              <FaSun className="my-1" onClick={() => setTheme("dark")} />
+            )
+          ) : (
+            <FaMoon className="my-1 invisible" />
+          )}
         </div>
       </nav>
     </header>
