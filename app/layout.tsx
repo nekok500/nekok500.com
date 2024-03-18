@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./_components/provider";
 import Header from "./_components/header";
 import Footer from "./_components/footer";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        <NextTopLoader />
         <Providers>
           <div className="px-4 py-6 xl:max-w-4xl mx-auto flex flex-col min-h-screen flex-grow">
             <Header />
