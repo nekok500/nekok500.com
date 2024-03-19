@@ -1,4 +1,4 @@
-import { client, Blog } from "@/libs/microcms";
+import { getBlogDetail } from "@/libs/microcms";
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import { notFound } from "next/navigation";
@@ -10,7 +10,7 @@ import { Tags } from "../_components/tags";
 import { Metadata } from "next";
 
 export const runtime = "edge";
-export const revalidate = 60;
+export const revalidate = 3600;
 
 function getSlug(slug: string): string {
   if (slug.match(/^\d{8}-/)) {
@@ -25,16 +25,11 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post = await client
-    .getListDetail<Blog>({
-      endpoint: "blogs",
-      contentId: getSlug(params.slug),
-    })
-    .catch((e: Error) => {
-      if (e.message.includes("404")) return notFound();
+  const post = await getBlogDetail(getSlug(params.slug)).catch((e: Error) => {
+    if (e.message.includes("404")) return notFound();
 
-      throw e;
-    });
+    throw e;
+  });
 
   if (post.eyecatch) {
     return {
@@ -62,16 +57,11 @@ export default async function BlogPage({
 }: {
   params: { slug: string };
 }) {
-  const post = await client
-    .getListDetail<Blog>({
-      endpoint: "blogs",
-      contentId: getSlug(params.slug),
-    })
-    .catch((e: Error) => {
-      if (e.message.includes("404")) return notFound();
+  const post = await getBlogDetail(getSlug(params.slug)).catch((e: Error) => {
+    if (e.message.includes("404")) return notFound();
 
-      throw e;
-    });
+    throw e;
+  });
 
   const $ = load(post.content);
   $("pre code").each((_, elm) => {

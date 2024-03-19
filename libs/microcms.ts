@@ -29,3 +29,14 @@ export type Tag = {
   name: string;
   index: number;
 };
+
+export const getBlogDetail = (id: string) =>
+  client.getListDetail<Blog>({
+    endpoint: "blogs",
+    contentId: id,
+    customRequestInit: {
+      next: {
+        tags: ["blogs", `blogs/${id}`],
+      },
+    },
+  });
