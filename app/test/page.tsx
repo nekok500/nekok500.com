@@ -7,7 +7,9 @@ type Response = {
 
 export default async function Page() {
   const data = (await (
-    await fetch("https://worldtimeapi.org/api/timezone/asia/tokyo")
+    await fetch("https://worldtimeapi.org/api/timezone/asia/tokyo", {
+      next: { tags: ["test"] },
+    })
   ).json()) as Response;
 
   return <h1>{data.datetime}</h1>;
