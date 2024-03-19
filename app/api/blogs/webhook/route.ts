@@ -1,5 +1,6 @@
+import { toYYYYMMDD } from "@/libs/utils";
 import { getOptionalRequestContext } from "@cloudflare/next-on-pages";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export const runtime = "edge";
@@ -7,13 +8,33 @@ export const runtime = "edge";
 type RequestBody = {
   id: string | null | undefined;
   api: string;
+  contents?: {
+    new: {
+      id: string;
+      draftValue?: {
+        createdAt: string;
+      };
+      publishValue?: {
+        createdAt: string;
+      };
+    };
+    old: {
+      id: string;
+      draftValue?: {
+        createdAt: string;
+      };
+      publishValue?: {
+        createdAt: string;
+      };
+    };
+  };
 };
 
 export async function POST(request: Request): Promise<Response> {
   const bodyText = await request.text();
   const bodyBuffer = Buffer.from(bodyText, "utf-8");
 
-  const { id, api: endpoint } = JSON.parse(bodyText) as RequestBody;
+  const { id, api: endpoint, contents } = JSON.parse(bodyText) as RequestBody;
   if (!bodyText) {
     console.error("Body is empty.");
     return NextResponse.json({
@@ -64,7 +85,17 @@ export async function POST(request: Request): Promise<Response> {
     });
 
   if (endpoint === "tags" || endpoint === "categories") revalidateTag("blogs"); // タグ、カテゴリのリネーム等は全てパージ
-  if (endpoint === "blogs") revalidateTag(`blogs/${id}`);
+  if (endpoint === "blogs") {
+    revalidateTag(`blogs/${id}`);
+    const slug = `/blogs/${toYYYYMMDD(
+      contents?.new.publishValue?.createdAt ||
+        contents?.new.draftValue?.createdAt ||
+        contents?.old.publishValue?.createdAt ||
+        contents?.old.draftValue?.createdAt!
+    )}-${id}`;
+    console.log(slug);
+    revalidatePath(slug);
+  }
 
   return NextResponse.json({ message: "success" });
 }

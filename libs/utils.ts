@@ -5,3 +5,19 @@ export function toDateString(date: Date) {
     .toString()
     .padStart(2, "0")}分`;
 }
+
+export function getSlug(slug: string): { id: string; date?: string } {
+  if (slug.match(/^\d{8}-/)) {
+    const parts = slug.split("-");
+    return {
+      id: parts.slice(1).join("-"),
+      date: parts[0],
+    };
+  } else {
+    return { id: slug };
+  }
+}
+
+export function toYYYYMMDD(date: string): string {
+  return date.split("T")[0].replaceAll("-", "");
+}

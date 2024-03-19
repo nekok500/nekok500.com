@@ -1,35 +1,31 @@
 import { getBlogDetail } from "@/libs/microcms";
 import { load } from "cheerio";
 import hljs from "highlight.js";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import "highlight.js/styles/github-dark.css";
 import Link from "next/link";
-import { toDateString } from "@/libs/utils";
+import { getSlug, toDateString, toYYYYMMDD } from "@/libs/utils";
 import { Tags } from "../_components/tags";
 import { Metadata } from "next";
 
 export const runtime = "edge";
 export const revalidate = 3600;
 
-function getSlug(slug: string): string {
-  if (slug.match(/^\d{8}-/)) {
-    return slug.split("-").slice(1).join("-");
-  } else {
-    return slug;
-  }
-}
-
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const post = await getBlogDetail(getSlug(params.slug)).catch((e: Error) => {
+  const { id, date } = getSlug(params.slug);
+  const post = await getBlogDetail(id).catch((e: Error) => {
     if (e.message.includes("404")) return notFound();
 
     throw e;
   });
+
+  const createdAt = toYYYYMMDD(post.createdAt);
+  if (createdAt != date) redirect(`/blogs/${createdAt}-${id}`);
 
   if (post.eyecatch) {
     return {
@@ -57,11 +53,15 @@ export default async function BlogPage({
 }: {
   params: { slug: string };
 }) {
-  const post = await getBlogDetail(getSlug(params.slug)).catch((e: Error) => {
+  const { id, date } = getSlug(params.slug);
+  const post = await getBlogDetail(id).catch((e: Error) => {
     if (e.message.includes("404")) return notFound();
 
     throw e;
   });
+
+  const createdAt = toYYYYMMDD(post.createdAt);
+  if (createdAt != date) redirect(`/blogs/${createdAt}-${id}`);
 
   const $ = load(post.content);
   $("pre code").each((_, elm) => {
