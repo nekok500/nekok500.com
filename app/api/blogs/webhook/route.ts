@@ -2,6 +2,8 @@ import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 import * as crypto from "crypto";
 
+export const runtime = "edge";
+
 type RequestBody = {
   id: string | null | undefined;
   api: string;
