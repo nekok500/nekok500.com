@@ -19,7 +19,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id, date } = getSlug(params.slug);
   const post = await getBlogDetail(id).catch((e: Error) => {
-    if (e.message.includes("404")) return notFound();
+    if (e.message.includes("404")) {
+      console.log("metadata: not found.");
+      return notFound();
+    }
 
     throw e;
   });
@@ -55,7 +58,10 @@ export default async function BlogPage({
 }) {
   const { id, date } = getSlug(params.slug);
   const post = await getBlogDetail(id).catch((e: Error) => {
-    if (e.message.includes("404")) return notFound();
+    if (e.message.includes("404")) {
+      console.log("page: not found.");
+      return notFound();
+    }
 
     throw e;
   });
