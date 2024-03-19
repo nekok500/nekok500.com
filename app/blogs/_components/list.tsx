@@ -1,4 +1,4 @@
-import { Blog } from "@/libs/microcms";
+import { Article } from "@/libs/microcms";
 import Link from "next/link";
 import { toDateString, toYYYYMMDD } from "@/libs/utils";
 import { FaClock } from "react-icons/fa";
@@ -13,7 +13,7 @@ export default function BlogList({
 }: {
   name?: string;
   icon?: ReactNode;
-  posts: Blog[];
+  posts: Article[];
 }) {
   return (
     <div>
