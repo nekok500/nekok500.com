@@ -92,8 +92,10 @@ export async function POST(request: Request): Promise<Response> {
         contents?.old.publishValue?.createdAt ||
         contents?.old.draftValue?.createdAt!
     )}-${id}`;
-    console.log(slug);
-    revalidateTag(`blogs/${slug}`);
+
+    console.log(`removeing tag cache: blogs/${id}`);
+    revalidateTag(`blogs/${id}`);
+    console.log(`removeing page cache: /blogs/${slug}`);
     revalidatePath(`/blogs/${slug}`, "page");
   }
 
@@ -102,5 +104,5 @@ export async function POST(request: Request): Promise<Response> {
 
 export async function GET(request: Request): Promise<Response> {
   revalidateTag(`blogs`);
-  return NextResponse.json({ message: "purged blog caches" });
+  return NextResponse.json({ message: "blog tag cache removed" });
 }
