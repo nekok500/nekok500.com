@@ -94,7 +94,7 @@ export async function POST(request: Request): Promise<Response> {
         contents?.old.draftValue?.createdAt!
     )}-${id}`;
     console.log(slug);
-    revalidatePath(slug);
+    revalidatePath(slug, "page");
   }
 
   return NextResponse.json({ message: "success" });
