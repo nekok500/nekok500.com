@@ -11,7 +11,6 @@ import { Metadata } from "next";
 
 export const runtime = "edge";
 export const revalidate = 60;
-export const fetchCache = "force-cache";
 
 function getSlug(slug: string): string {
   if (slug.match(/^\d{8}-/)) {
