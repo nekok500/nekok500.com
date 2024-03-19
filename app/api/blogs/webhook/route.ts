@@ -86,15 +86,15 @@ export async function POST(request: Request): Promise<Response> {
 
   if (endpoint === "tags" || endpoint === "categories") revalidateTag("blogs"); // タグ、カテゴリのリネーム等は全てパージ
   if (endpoint === "blogs") {
-    revalidateTag(`blogs/${id}`);
-    const slug = `/blogs/${toYYYYMMDD(
+    const slug = `${toYYYYMMDD(
       contents?.new.publishValue?.createdAt ||
         contents?.new.draftValue?.createdAt ||
         contents?.old.publishValue?.createdAt ||
         contents?.old.draftValue?.createdAt!
     )}-${id}`;
     console.log(slug);
-    revalidatePath(slug, "page");
+    revalidateTag(`blogs/${slug}`);
+    revalidatePath(`/blogs/${slug}`, "page");
   }
 
   return NextResponse.json({ message: "success" });
