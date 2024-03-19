@@ -1,4 +1,4 @@
-import { getBlogDetail } from "@/libs/microcms";
+import { Blog, client } from "@/libs/microcms";
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import { notFound, redirect } from "next/navigation";
@@ -7,49 +7,9 @@ import "highlight.js/styles/github-dark.css";
 import Link from "next/link";
 import { getSlug, toDateString, toYYYYMMDD } from "@/libs/utils";
 import { Tags } from "../_components/tags";
-import { Metadata } from "next";
 
 export const runtime = "edge";
 export const revalidate = 3600;
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { id, date } = getSlug(params.slug);
-  const post = await getBlogDetail(id).catch((e: Error) => {
-    if (e.message.includes("404")) {
-      console.log("metadata: not found.");
-      return notFound();
-    }
-
-    throw e;
-  });
-
-  const createdAt = toYYYYMMDD(post.createdAt);
-  if (createdAt != date) redirect(`/blogs/${createdAt}-${id}`);
-
-  if (post.eyecatch) {
-    return {
-      title: post.title,
-      description: post.description,
-      openGraph: {
-        images: [post.eyecatch.url],
-      },
-      twitter: {
-        card: "summary_large_image",
-        creator: "@nekok500",
-        images: post.eyecatch.url,
-      },
-    };
-  } else {
-    return {
-      title: post.title,
-      description: post.description,
-    };
-  }
-}
 
 export default async function BlogPage({
   params,
@@ -57,14 +17,16 @@ export default async function BlogPage({
   params: { slug: string };
 }) {
   const { id, date } = getSlug(params.slug);
-  const post = await getBlogDetail(id).catch((e: Error) => {
-    if (e.message.includes("404")) {
-      console.log("page: not found.");
-      return notFound();
-    }
+  const post = await client
+    .getListDetail<Blog>({ endpoint: "blogs", contentId: id })
+    .catch((e: Error) => {
+      if (e.message.includes("404")) {
+        console.log("page: not found.");
+        return notFound();
+      }
 
-    throw e;
-  });
+      throw e;
+    });
 
   const createdAt = toYYYYMMDD(post.createdAt);
   if (createdAt != date) redirect(`/blogs/${createdAt}-${id}`);

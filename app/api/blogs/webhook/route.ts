@@ -93,8 +93,6 @@ export async function POST(request: Request): Promise<Response> {
         contents?.old.draftValue?.createdAt!
     )}-${id}`;
 
-    console.log(`removeing tag cache: blogs/${id}`);
-    revalidateTag(`blogs/${id}`);
     console.log(`removeing page cache: /blogs/${slug}`);
     revalidatePath(`/blogs/${slug}`, "page");
   }

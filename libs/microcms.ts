@@ -1,8 +1,6 @@
 import { MicroCMSDate, MicroCMSImage, createClient } from "microcms-js-sdk";
 import { getOptionalRequestContext } from "@cloudflare/next-on-pages";
 
-export const revalidate = 600;
-
 export const client = createClient({
   serviceDomain: "nekok500-com",
   apiKey:
@@ -32,17 +30,6 @@ export type Tag = {
   index: number;
 };
 
-export const getBlogDetail = async (id: string) => {
-  const props = {
-    endpoint: "blogs",
-    contentId: id,
-    customRequestInit: {
-      next: {
-        tags: ["blogs", `blogs/${id}`],
-        revalidate: 600,
-      },
-    },
-  };
-  console.log("requesting with props: ", props);
-  return await client.getListDetail<Blog>(props);
-};
+// export const getBlogDetail = (id: string) => {
+//   client.getListDetail<Blog>({ endpoint: "blogs", contentId: id });
+// };
