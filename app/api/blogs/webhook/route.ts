@@ -85,7 +85,7 @@ export async function POST(request: Request): Promise<Response> {
     });
 
   if (endpoint === "tags" || endpoint === "categories") revalidateTag("/blogs"); // タグ、カテゴリのリネーム等は全てパージ
-  if (endpoint === "blogs") {
+  if (endpoint === "articles") {
     const slug = `${toYYYYMMDD(
       contents?.new?.publishValue?.createdAt ||
         contents?.new?.draftValue?.createdAt ||
@@ -93,12 +93,10 @@ export async function POST(request: Request): Promise<Response> {
         contents?.old?.draftValue?.createdAt!
     )}-${id}`;
 
-    console.log(`removeing page cache: /blogs/${slug}`);
+    console.log(`removeing page caches: ${slug}`);
     revalidatePath(`/blogs/${slug}`, "page");
-    console.log(`removeing tag cache: /blogs/${id}`);
-    revalidateTag(`/blogs/${id}`);
-    console.log(`removeing tag cache: /blogs/l`);
-    revalidateTag("/blogs/l");
+    revalidateTag(`/blogs/articles/${id}`);
+    revalidateTag("/blogs/articles/l");
   }
 
   return NextResponse.json({ message: "success" });
