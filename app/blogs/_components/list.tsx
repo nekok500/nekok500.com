@@ -1,6 +1,6 @@
 import { Blog } from "@/libs/microcms";
 import Link from "next/link";
-import { toDateString } from "@/libs/utils";
+import { toDateString, toYYYYMMDD } from "@/libs/utils";
 import { FaClock } from "react-icons/fa";
 import { ReactNode } from "react";
 import { Tags } from "./tags";
@@ -27,12 +27,9 @@ export default function BlogList({
       </h1>
       <div className="mt-2 grid">
         {posts.map((post) => {
-          if (post.visible === false)
-            return
+          if (post.visible === false) return;
 
-          const slug = `${post
-            .publishedAt!.split("T")[0]
-            .replaceAll("-", "")}-${post.id}`;
+          const slug = `${toYYYYMMDD(post.createdAt!)}-${post.id}`;
 
           return (
             <div
