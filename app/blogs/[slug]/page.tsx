@@ -1,4 +1,4 @@
-import { Blog, client } from "@/libs/microcms";
+import { Blog, client, getBlogDetail, getBlogList } from "@/libs/microcms";
 import { load } from "cheerio";
 import hljs from "highlight.js";
 import { notFound, redirect } from "next/navigation";
@@ -17,16 +17,14 @@ export default async function BlogPage({
   params: { slug: string };
 }) {
   const { id, date } = getSlug(params.slug);
-  const post = await client
-    .getListDetail<Blog>({ endpoint: "blogs", contentId: id })
-    .catch((e: Error) => {
-      if (e.message.includes("404")) {
-        console.log("page: not found.");
-        return notFound();
-      }
+  const post = await getBlogDetail(id).catch((e: Error) => {
+    if (e.message.includes("404")) {
+      console.log("page: not found.");
+      return notFound();
+    }
 
-      throw e;
-    });
+    throw e;
+  });
 
   const createdAt = toYYYYMMDD(post.createdAt);
   if (createdAt != date) redirect(`/blogs/${createdAt}-${id}`);
@@ -83,16 +81,14 @@ export default async function BlogPage({
   );
 }
 
-// export async function generateStaticParams() {
-//   const { contents } = await client.getList<Blog>({
-//     endpoint: "blogs",
-//   });
+export async function generateStaticParams() {
+  const { contents } = await getBlogList();
 
-//   const paths = contents.map((post) => {
-//     return {
-//       slug: post.id,
-//     };
-//   });
+  const paths = contents.map((post) => {
+    return {
+      slug: `${toYYYYMMDD(post.createdAt)}-${post.id}`,
+    };
+  });
 
-//   return [...paths];
-// }
+  return [...paths];
+}

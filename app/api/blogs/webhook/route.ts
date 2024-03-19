@@ -9,7 +9,7 @@ type RequestBody = {
   id: string | null | undefined;
   api: string;
   contents?: {
-    new: {
+    new?: {
       id: string;
       draftValue?: {
         createdAt: string;
@@ -18,7 +18,7 @@ type RequestBody = {
         createdAt: string;
       };
     };
-    old: {
+    old?: {
       id: string;
       draftValue?: {
         createdAt: string;
@@ -84,19 +84,21 @@ export async function POST(request: Request): Promise<Response> {
       message: "signature is invalid",
     });
 
-  if (endpoint === "tags" || endpoint === "categories") revalidateTag("blogs"); // タグ、カテゴリのリネーム等は全てパージ
+  if (endpoint === "tags" || endpoint === "categories") revalidateTag("/blogs"); // タグ、カテゴリのリネーム等は全てパージ
   if (endpoint === "blogs") {
     const slug = `${toYYYYMMDD(
-      contents?.new.publishValue?.createdAt ||
-        contents?.new.draftValue?.createdAt ||
-        contents?.old.publishValue?.createdAt ||
-        contents?.old.draftValue?.createdAt!
+      contents?.new?.publishValue?.createdAt ||
+        contents?.new?.draftValue?.createdAt ||
+        contents?.old?.publishValue?.createdAt ||
+        contents?.old?.draftValue?.createdAt!
     )}-${id}`;
 
     console.log(`removeing page cache: /blogs/${slug}`);
     revalidatePath(`/blogs/${slug}`, "page");
     console.log(`removeing tag cache: /blogs/${id}`);
     revalidateTag(`/blogs/${id}`);
+    console.log(`removeing tag cache: /blogs/l`);
+    revalidateTag("/blogs/l");
   }
 
   return NextResponse.json({ message: "success" });

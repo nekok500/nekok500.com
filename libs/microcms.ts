@@ -30,10 +30,19 @@ export type Tag = {
   index: number;
 };
 
-export const getBlogDetail = (id: string) => {
+export const getBlogDetail = (id: string) =>
   client.getListDetail<Blog>({
     endpoint: "blogs",
     contentId: id,
-    customRequestInit: { next: { revalidate: 3600, tags: [`/blogs/${id}`] } },
+    customRequestInit: {
+      next: { revalidate: 3600, tags: ["/blogs", `/blogs/${id}`] },
+    },
   });
-};
+
+export const getBlogList = () =>
+  client.getList<Blog>({
+    endpoint: "blogs",
+    customRequestInit: {
+      next: { revalidate: 3600, tags: ["/blogs", "/blogs/l"] },
+    },
+  });
