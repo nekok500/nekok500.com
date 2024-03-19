@@ -5,4 +5,5 @@ interface CloudflareEnv {
   // KV Example:
   // MY_KV: KVNamespace
   MICROCMS_API_KEY: string;
+  MICROCMS_WEBHOOK_SIGNATURE_SECRET: string;
 }

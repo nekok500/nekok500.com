@@ -1,6 +1,6 @@
+import { getOptionalRequestContext } from "@cloudflare/next-on-pages";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
-import * as crypto from "crypto";
 
 export const runtime = "edge";
 
@@ -21,38 +21,47 @@ export async function POST(request: Request): Promise<Response> {
     });
   }
 
-  const secret = process.env.MICROCMS_WEBHOOK_SIGNATURE_SECRET;
+  const secret =
+    getOptionalRequestContext()?.env.MICROCMS_WEBHOOK_SIGNATURE_SECRET ||
+    process.env.MICROCMS_WEBHOOK_SIGNATURE_SECRET!;
+
   if (!secret) {
-    console.error("Secret is empty.");
     return NextResponse.json({
-      status: 500,
+      status: 401,
+      message: "secret is missing",
     });
   }
 
   const signature = request.headers.get("X-MICROCMS-Signature");
   if (!signature) {
-    console.error("Signature is empty.");
     return NextResponse.json({
-      status: 400,
+      status: 401,
+      message: "signature is missing",
     });
   }
 
-  const expectedSignature = crypto
-    .createHmac("sha256", secret)
-    .update(bodyBuffer)
-    .digest("hex");
-
-  const isValid = crypto.timingSafeEqual(
-    Buffer.from(signature),
-    Buffer.from(expectedSignature)
+  const enc = new TextEncoder();
+  const alg = { name: "HMAC", hash: "SHA-256" };
+  const key = await crypto.subtle.importKey(
+    "raw",
+    enc.encode(secret),
+    alg,
+    false,
+    ["verify"]
   );
 
-  if (!isValid) {
-    console.error("Invalid signature.");
+  if (
+    !(await crypto.subtle.verify(
+      alg,
+      key,
+      Buffer.from(signature, "hex"),
+      bodyBuffer
+    ))
+  )
     return NextResponse.json({
-      status: 400,
+      status: 401,
+      message: "signature is invalid",
     });
-  }
 
   if (endpoint === "tags" || endpoint === "categories") revalidateTag("blogs"); // タグ、カテゴリのリネーム等は全てパージ
   if (endpoint === "blogs") revalidateTag(`blogs/${id}`);
