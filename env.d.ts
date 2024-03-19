@@ -6,4 +6,5 @@ interface CloudflareEnv {
   // MY_KV: KVNamespace
   MICROCMS_API_KEY: string;
   MICROCMS_WEBHOOK_SIGNATURE_SECRET: string;
+  __NEXT_ON_PAGES__KV_SUSPENSE_CACHE: KVNamespace;
 }
