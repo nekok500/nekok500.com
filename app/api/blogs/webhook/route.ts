@@ -95,6 +95,8 @@ export async function POST(request: Request): Promise<Response> {
 
     console.log(`removeing page cache: /blogs/${slug}`);
     revalidatePath(`/blogs/${slug}`, "page");
+    console.log(`removeing tag cache: /blogs/${id}`);
+    revalidateTag(`/blogs/${id}`);
   }
 
   return NextResponse.json({ message: "success" });
