@@ -35,13 +35,14 @@ export type Tag = {
   index: number;
 };
 
-export const getArticleDetail = (id: string) =>
+export const getArticleDetail = (id: string, queries?: MicroCMSQueries) =>
   client.getListDetail<Article>({
     endpoint: "articles",
     contentId: id,
     customRequestInit: {
       next: { revalidate: 3600, tags: ["/blogs", `/blogs/articles/${id}`] },
     },
+    queries,
   });
 
 export const getArticles = (queries?: MicroCMSQueries) =>
