@@ -12,7 +12,7 @@ export const revalidate = 3600;
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string, draftKey: string };
+  params: { slug: string; draftKey: string };
 }): Promise<Metadata> {
   const { id, date } = getSlug(params.slug);
   const article = await getArticleDetail(id, {
@@ -26,10 +26,16 @@ export async function generateMetadata({
   const createdAt = toYYYYMMDD(article.createdAt);
   if (createdAt != date) redirect(`/blogs/${createdAt}-${id}`);
 
+  let metadata: Metadata = {
+    title: `下書き: ${article.title}`,
+    description: article.description,
+    robots: {
+      index: false,
+    },
+  };
+
   if (article.eyecatch) {
-    return {
-      title: `下書き: ${article.title}`,
-      description: article.description,
+    metadata = {
       openGraph: {
         images: [article.eyecatch.url],
       },
@@ -38,13 +44,11 @@ export async function generateMetadata({
         creator: "@nekok500",
         images: article.eyecatch.url,
       },
-    };
-  } else {
-    return {
-      title: article.title,
-      description: article.description,
+      ...metadata,
     };
   }
+
+  return metadata;
 }
 
 export default async function BlogPage({
