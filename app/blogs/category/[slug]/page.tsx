@@ -2,6 +2,7 @@ import { getArticles, getCategories, getCategoryDetail } from "@/libs/microcms";
 import BlogList from "../../_components/list";
 import { FaAlignLeft } from "react-icons/fa";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 export const runtime = "edge";
@@ -11,7 +12,11 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const category = await getCategoryDetail(params.slug);
+  const category = await getCategoryDetail(params.slug).catch((e: Error) => {
+    if (e.message.includes("404")) return notFound();
+
+    throw e;
+  });
 
   return {
     title: `${category.name} の記事一覧`,
@@ -23,7 +28,12 @@ export default async function ListByCategoryPage({
 }: {
   params: { slug: string };
 }) {
-  const category = await getCategoryDetail(params.slug);
+  const category = await getCategoryDetail(params.slug).catch((e: Error) => {
+    if (e.message.includes("404")) return notFound();
+
+    throw e;
+  });
+
   const posts = await getArticles({
     filters: `category[equals]${category.id}`,
   });

@@ -2,6 +2,7 @@ import { getArticles, getTagDetail, getTags } from "@/libs/microcms";
 import BlogList from "../../_components/list";
 import { FaTag } from "react-icons/fa";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 export const runtime = "edge";
@@ -11,7 +12,11 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const tag = await getTagDetail(params.slug);
+  const tag = await getTagDetail(params.slug).catch((e: Error) => {
+    if (e.message.includes("404")) return notFound();
+
+    throw e;
+  });
 
   return {
     title: `${tag.name} の記事一覧`,
@@ -23,7 +28,11 @@ export default async function ListByTagPage({
 }: {
   params: { slug: string };
 }) {
-  const tag = await getTagDetail(params.slug);
+  const tag = await getTagDetail(params.slug).catch((e: Error) => {
+    if (e.message.includes("404")) return notFound();
+
+    throw e;
+  });
   const articles = await getArticles({
     filters: `tags[contains]${tag.id}`,
   });
