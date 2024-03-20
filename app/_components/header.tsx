@@ -11,7 +11,7 @@ export default function Header() {
 
   useEffect(() => {
     setIsLoaded(true);
-  });
+  }, []);
 
   return (
     <header>
