@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "404 Not Found - nekok500.com",
+  title: "404 Not Found",
 };
 
 export default function NotFoundPage() {
