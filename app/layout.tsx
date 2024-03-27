@@ -5,6 +5,7 @@ import { Providers } from "./_components/provider";
 import Header from "./_components/header";
 import Footer from "./_components/footer";
 import NextTopLoader from "nextjs-toploader";
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,8 @@ export default function RootLayout({
           <Footer />
         </Providers>
       </body>
+
+      <Script strategy="lazyOnload" src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7a3dff05c61841479c873ec3e53f10f6"}' />
     </html>
   );
 }
