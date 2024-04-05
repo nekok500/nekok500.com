@@ -25,25 +25,26 @@ export async function generateMetadata({
   const createdAt = toYYYYMMDD(post.createdAt);
   if (createdAt != date) redirect(`/blogs/${createdAt}-${id}`);
 
+  let metadata = {
+    title: post.title,
+    description: post.description,
+    robots: {
+      index: post.visible
+    }
+  } as Metadata;
+
   if (post.eyecatch) {
-    return {
-      title: post.title,
-      description: post.description,
-      openGraph: {
-        images: [post.eyecatch.url],
-      },
-      twitter: {
-        card: "summary_large_image",
-        creator: "@nekok500",
-        images: post.eyecatch.url,
-      },
+    metadata.openGraph = {
+      images: [post.eyecatch.url],
     };
-  } else {
-    return {
-      title: post.title,
-      description: post.description,
+    metadata.twitter = {
+      card: "summary_large_image",
+      creator: "@nekok500",
+      images: post.eyecatch.url,
     };
   }
+
+  return metadata;
 }
 
 export default async function BlogPage({
