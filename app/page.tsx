@@ -116,7 +116,9 @@ export default function HomePage() {
       />
       <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
         こんにちは、私は
-        <p className="text-indigo-600">ねこかわいい</p>
+        <Link href="/about">
+          <p className="text-indigo-600">ねこかわいい</p>
+        </Link>
         です！
       </h1>
       <h3 className="text-gray-500">

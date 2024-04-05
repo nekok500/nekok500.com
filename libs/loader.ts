@@ -1,6 +1,8 @@
 import { ImageLoaderProps } from "next/image";
 
-export default function discordCDNLoader(props: ImageLoaderProps): string {
+export default function CDNLoader(props: ImageLoaderProps): string {
+  if (props.src.startsWith("/")) return props.src;
+
   const url = new URL(props.src);
   const params = url.searchParams;
 

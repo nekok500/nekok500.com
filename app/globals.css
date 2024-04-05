@@ -55,10 +55,13 @@
 .content h3,
 .content h4,
 .content h5,
-.content h6,
-.content p {
+.content h6 {
   @apply my-4;
-  color: rgb(var(--foreground-rgb));
+}
+
+.content p {
+  @apply my-2;
+  /* color: rgb(var(--foreground-rgb)); */
 }
 
 .content code {

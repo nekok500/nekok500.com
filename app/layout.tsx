@@ -28,9 +28,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextTopLoader />
         <Providers>
-          <div className="px-4 py-6 xl:max-w-4xl mx-auto flex flex-col min-h-screen flex-grow">
+          <div className="px-4 pt-6 xl:max-w-4xl mx-auto flex flex-col min-h-screen flex-grow">
             <Header />
-            <main className="py-6">{children}</main>
+            <main className="pt-6">{children}</main>
           </div>
           <Footer />
         </Providers>

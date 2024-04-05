@@ -24,7 +24,13 @@ export default function Header() {
         </Link>
         <div className="flex justify-between">
           <Link
-            className="font-semibold text-gray-900 dark:text-gray-100 mx-6"
+            className="font-semibold text-gray-900 dark:text-gray-100 mx-2"
+            href="/about"
+          >
+            私について
+          </Link>
+          <Link
+            className="font-semibold text-gray-900 dark:text-gray-100 mx-2"
             href="/blogs"
           >
             ブログ
@@ -37,12 +43,18 @@ export default function Header() {
           </a> */}
           {isLoaded ? (
             theme == "dark" ? (
-              <FaMoon className="my-1" onClick={() => setTheme("light")} />
+              <FaMoon
+                className="ml-4 mr-6 my-1"
+                onClick={() => setTheme("light")}
+              />
             ) : (
-              <FaSun className="my-1" onClick={() => setTheme("dark")} />
+              <FaSun
+                className="ml-4 mr-6 my-1"
+                onClick={() => setTheme("dark")}
+              />
             )
           ) : (
-            <FaMoon className="my-1 invisible" />
+            <FaMoon className="ml-4 mr-6 my-1 invisible" />
           )}
         </div>
       </nav>
