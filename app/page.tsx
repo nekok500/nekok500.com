@@ -10,6 +10,7 @@ import { Person, WithContext } from "schema-dts";
 const jsonLd: WithContext<Person> = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://nekok500.com",
   name: "ねこかわいい",
   url: "https://nekok500.com",
   image:
