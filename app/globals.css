@@ -77,6 +77,10 @@
   @apply list-disc ml-4;
 }
 
+.content a {
+  @apply text-blue-600 dark:text-blue-500 hover:underline;
+}
+
 /* .content li {
   @apply ml-3;
 } */
