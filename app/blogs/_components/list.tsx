@@ -17,11 +17,14 @@ export default function BlogList({
 }) {
   return (
     <div>
+      <p className="mb-2 text-gray-600 dark:text-gray-400">
+        <Link href="/blogs">ブログ</Link> /
+      </p>
       <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
         <div className="flex flex-row">
           {icon}
-          <span className={`-my-1 ${icon ? "ml-1" : ""}`}>
-            {name ? `${name} の` : "ブログ"}記事一覧
+          <span className={`-my-1 ${icon && "ml-1"}`}>
+            {name && `${name} の`}記事一覧
           </span>
         </div>
       </h1>
@@ -36,8 +39,14 @@ export default function BlogList({
               key={post.id}
               className="border border-gray-300 rounded-md flex flex-col p-4 my-2"
             >
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                <Link href={`/blogs`}>ブログ</Link> /{" "}
+                <Link href={`/blogs/category/${post.category.id}`}>
+                  {post.category.name}
+                </Link>
+              </p>
               <Link href={`/blogs/${slug}`}>
-                <p className="text-2xl py-2 font-semibold">{post.title}</p>
+                <p className="text-2xl pb-2 font-semibold">{post.title}</p>
               </Link>
               <div className="flex items-center justify-between text-sm text-gray-700 dark:text-gray-300">
                 <div className="flex">

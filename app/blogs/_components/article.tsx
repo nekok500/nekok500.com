@@ -35,13 +35,13 @@ export default function ArticleContent({
 
   return (
     <div>
-      <p className="text-md text-gray-600 dark:text-gray-400">
+      <p className="mb-1 text-md text-gray-600 dark:text-gray-400">
         <Link href="/blogs">ブログ</Link> /{" "}
         <Link href={`/blogs/category/${article.category.id}`}>
           {article.category.name}
         </Link>
       </p>
-      <h1 className="text-4xl font-semibold my-1 text-gray-900 dark:text-gray-100 text-wrap">
+      <h1 className="text-4xl font-semibold text-gray-900 dark:text-gray-100 text-wrap">
         {isDraft && "下書き: "}
         {article.title}
       </h1>
