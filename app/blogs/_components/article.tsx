@@ -1,7 +1,8 @@
 import { Article } from "@/libs/microcms";
-import { Tags } from "./tags";
+import { ArticleInfo, Author } from "./article-info";
 import { load } from "cheerio";
 import Link from "next/link";
+import Authors from "../authors.json";
 
 import hljs from "highlight.js";
 import "highlight.js/styles/github-dark.css";
@@ -58,7 +59,12 @@ export default function ArticleContent({
             </p>
           )}
         </div>
-        {article.tags && <Tags tags={article.tags} />}
+        {article.tags && (
+          <ArticleInfo
+            tags={article.tags}
+            authors={article.authors?.map((e) => (Authors as any)[e] as Author)}
+          />
+        )}
       </div>
 
       <div

@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import { FaGithub, FaTwitter, FaDiscord, FaPython } from "react-icons/fa";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import Link from "next/link";
+import Collaborator from "./_components/collaborator";
 
 function Card({
   title,
@@ -19,34 +20,6 @@ function Card({
       </h5>
       <p className="font-normal text-gray-700 dark:text-gray-300">{children}</p>
     </div>
-  );
-}
-
-function Collaborator({
-  name,
-  avatar,
-}: {
-  name: string;
-  avatar: string;
-}): ReactNode {
-  const [isOpen, setIsPopover] = useState(false);
-
-  return (
-    <Popover isOpen={isOpen} placement="top" showArrow={true}>
-      <PopoverTrigger
-        onMouseEnter={() => setIsPopover(true)}
-        onMouseLeave={() => setIsPopover(false)}
-      >
-        <Image
-          className="rounded-full"
-          src={`https://cdn.discordapp.com/avatars/${avatar}`}
-          width={24}
-          alt={""}
-          height={24}
-        />
-      </PopoverTrigger>
-      <PopoverContent>{name}</PopoverContent>
-    </Popover>
   );
 }
 
@@ -209,11 +182,11 @@ export default function HomePage() {
             <>
               <Collaborator
                 name="黒猫ちゃん"
-                avatar="608788412367110149/356aa0c6ffb2658b84d98e436be2081a.webp"
+                avatar="https://cdn.discordapp.com/avatars/608788412367110149/356aa0c6ffb2658b84d98e436be2081a.webp"
               />
               <Collaborator
                 name="ap12"
-                avatar="616577611052613632/52ba62f47adee29ce1ad0ab2d618e262.webp"
+                avatar="https://cdn.discordapp.com/avatars/616577611052613632/52ba62f47adee29ce1ad0ab2d618e262.webp"
               />
             </>
           }

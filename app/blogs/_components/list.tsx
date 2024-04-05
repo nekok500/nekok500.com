@@ -3,8 +3,9 @@ import Link from "next/link";
 import { toDateString, toYYYYMMDD } from "@/libs/utils";
 import { FaClock } from "react-icons/fa";
 import { ReactNode } from "react";
-import { Tags } from "./tags";
+import { ArticleInfo, Author } from "./article-info";
 import Image from "next/image";
+import Authors from "../authors.json";
 
 export default function BlogList({
   name,
@@ -57,7 +58,12 @@ export default function BlogList({
                     {toDateString(new Date(post.publishedAt!))}
                   </p>
                 </div>
-                {post.tags && <Tags tags={post.tags} />}
+                <ArticleInfo
+                  tags={post.tags}
+                  authors={post.authors?.map(
+                    (e) => (Authors as any)[e] as Author
+                  )}
+                />
               </div>
 
               {post.description && <p>{post.description}</p>}

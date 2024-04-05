@@ -22,6 +22,7 @@ export type Article = {
   category: Category;
   description?: string;
   visible?: boolean;
+  authors?: string[];
 } & MicroCMSDate;
 
 export type Category = {
