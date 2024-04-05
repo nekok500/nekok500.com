@@ -41,10 +41,9 @@ export default function BlogList({
               className="border border-gray-300 rounded-md flex flex-col p-4 my-2"
             >
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                <Link href={`/blogs`}>ブログ</Link> /{" "}
                 <Link href={`/blogs/category/${post.category.id}`}>
                   {post.category.name}
-                </Link>
+                </Link> /
               </p>
               <Link href={`/blogs/${slug}`}>
                 <p className="text-2xl pb-2 font-semibold">{post.title}</p>
