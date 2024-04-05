@@ -43,18 +43,12 @@ export default function Header() {
           </a> */}
           {isLoaded ? (
             theme == "dark" ? (
-              <FaMoon
-                className="ml-4 mr-6 my-1"
-                onClick={() => setTheme("light")}
-              />
+              <FaMoon className="mx-2 my-1" onClick={() => setTheme("light")} />
             ) : (
-              <FaSun
-                className="ml-4 mr-6 my-1"
-                onClick={() => setTheme("dark")}
-              />
+              <FaSun className="mx-2 my-1" onClick={() => setTheme("dark")} />
             )
           ) : (
-            <FaMoon className="ml-4 mr-6 my-1 invisible" />
+            <FaMoon className="mx-2 my-1 invisible" />
           )}
         </div>
       </nav>
