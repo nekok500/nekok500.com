@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     default: "nekok500.com",
   },
   description: "ねこかわいいのポートフォリオ的ななにか",
+  keywords: ["nekok500", "ねこかわいい"],
 };
 
 export default function RootLayout({
