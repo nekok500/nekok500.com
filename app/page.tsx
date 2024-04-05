@@ -5,6 +5,19 @@ import { FaGithub, FaTwitter, FaDiscord, FaPython } from "react-icons/fa";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
 import Link from "next/link";
 import Collaborator from "./_components/collaborator";
+import { Person, WithContext } from "schema-dts";
+
+const jsonLd: WithContext<Person> = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "ねこかわいい",
+  url: "https://nekok500.com",
+  image:
+    "https://gravatar.com/avatar/5d5be9e85cbd7a927c1112e3ddab36726228d1c1ac6834da9d27fb0265f5dfe4",
+  worksFor: "KuronekoServer",
+  email: "me@nekok500.com",
+  description: "ねこです。お手柔らかにお願いします。",
+};
 
 function Card({
   title,
@@ -96,6 +109,10 @@ export default function HomePage() {
 
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
         こんにちは、私は
         <p className="text-indigo-600">ねこかわいい</p>
