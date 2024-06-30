@@ -5,6 +5,22 @@ export const metadata: Metadata = {
   title: "私について",
 };
 
+function MemberShip() {
+  "use client";
+
+  return (
+    <p>
+      ホロ: 🌸(メンシ
+      {6 +
+        Math.floor(
+          (new Date().getTime() - new Date("2024-06-10").getTime()) /
+            (30 * 24 * 60 * 60 * 1000)
+        )}
+      ヶ月)
+    </p>
+  );
+}
+
 export default function Page() {
   return (
     <div className="content">
@@ -74,14 +90,7 @@ export default function Page() {
       </div>
 
       <div>
-        <p>
-          ホロ: 🌸(メンシ
-          {Math.floor(
-            (new Date().getTime() - new Date("2023-12-06").getTime()) /
-              (30 * 24 * 60 * 60 * 1000)
-          )}
-          ヶ月)
-        </p>
+        <MemberShip />
       </div>
     </div>
   );
