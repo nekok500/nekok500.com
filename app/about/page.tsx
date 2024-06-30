@@ -67,8 +67,8 @@ export default function Page() {
             組織員 2021/10/3〜
           </li>
           <li>
-            <Link href="https://kuroneko6423.com">KuronekoServer</Link> 管理者
-            2022/3/21〜
+            <Link href="https://krnk.org">KuronekoServer</Link> 管理者
+            2022/3/21〜2024/06/30
           </li>
         </ul>
       </div>

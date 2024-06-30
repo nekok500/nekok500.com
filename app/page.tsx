@@ -15,7 +15,7 @@ const jsonLd: WithContext<Person> = {
   url: "https://nekok500.com",
   image:
     "https://gravatar.com/avatar/5d5be9e85cbd7a927c1112e3ddab36726228d1c1ac6834da9d27fb0265f5dfe4",
-  worksFor: "KuronekoServer",
+  // worksFor: "KuronekoServer",
   email: "me@nekok500.com",
   description: "ねこです。お手柔らかにお願いします。",
 };
@@ -121,9 +121,9 @@ export default function HomePage() {
         </Link>
         です！
       </h1>
-      <h3 className="text-gray-500">
+      {/* <h3 className="text-gray-500">
         <a href="https://kuroneko6423.com">KuronekoServer Admin</a>
-      </h3>
+      </h3> */}
       <p className="mt-6 leading-6">
         しがない男子学生です。
         いろんな言語や界隈に手を出しては引っ込めてる自由な人(猫)です。
@@ -199,18 +199,12 @@ export default function HomePage() {
             </>
           }
           collab={
-            <>
-              <Collaborator
-                name="黒猫ちゃん"
-                avatar="https://cdn.discordapp.com/avatars/608788412367110149/356aa0c6ffb2658b84d98e436be2081a.webp"
-              />
-              <Collaborator
-                name="ap12"
-                avatar="https://cdn.discordapp.com/avatars/616577611052613632/52ba62f47adee29ce1ad0ab2d618e262.webp"
-              />
-            </>
+            <Collaborator
+              name="KuronekoServer"
+              avatar="https://cdn.discordapp.com/avatars/1035736216055857242/16b5fbee3b36024c6f3050e5d03b10ee.webp"
+            />
           }
-          link="https://tts.kuroneko6423.com"
+          link="https://tts.krnk.org"
         >
           <p>
             Discordのテキストチャンネルを読み上げるボットです。基本的な機能は無料で使えて、様々な種類の合成エンジンに対応しています。
@@ -234,7 +228,13 @@ export default function HomePage() {
               Artifacter Modified
             </>
           }
-          link="https://artifacter.kuroneko6423.com"
+          collab={
+            <Collaborator
+              name="KuronekoServer"
+              avatar="https://cdn.discordapp.com/avatars/1035736216055857242/16b5fbee3b36024c6f3050e5d03b10ee.webp"
+            />
+          }
+          link="https://artifacter.krnk.org"
         >
           <p>
             原神のキャラクターステータスをグラフィカルに描画する、本家Artifacterの後継です。
