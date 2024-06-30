@@ -4,20 +4,84 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "私について",
 };
+const nye =
+  "                         .,:loodooc; \n \
+                     'coxkxxxxdxxxkkko. \n \
+                  .:odddddddddddodxxxxd' \n \
+                 ,llooooooooooooollooddx' \n \
+                 ccccllllllllllllcccclood. \n \
+                .:::::cccclllllll,';cccloc \n \
+                 .;;;;:::::ccclll   .;cco; \n \
+                  .,;;;;::ccccccl     ';,                      ',. \n \
+                    .,;;;::ccccll;:c:::cllllll:;'             .ooddlcccc;. \n \
+                      .;;:::ccclodddddxxxkkkkkOO000koc,.      'llodddxxxxddc' \n \
+                     ;lo::clloooodddddxxxxkkkkkkkkkO000Oko:loddolloxxdddddxdo:' \n \
+                  ;ldollooooooooodddxxxxxxxkkkkkkkxxkOOOOkkkd:oolloooddddxxolc: \n \
+               .:ooolloooooooooodddddddddddxxxxxxxxxkkkkkkxdd;.,,;:cllooolllllc. \n \
+              ;oollllooooolllloooddddddc;oddddddddddxkxxkxxxoc. ..';;;;::::::::. \n \
+            .colllllloooollcllloooooooo:,cdddddodoooddxxxxddddc'  ....,,,,'.,;' \n \
+           ,llclllllllllloxxllclloooooo:,:oooooooooolclooddddl.c:.   ..'..  .. \n \
+          'lccccccllllllloollllllllloooc,coooooooooool,.'',::.;llc'.   ..,;;, \n \
+         .cccccccccllllokkkxccllllllllll:oooooooooookkkocll,.,;,'':;;. .',;;' \n \
+        .;lcccc::cccccoxxkkklcllllllllllllloooolloookkkkl:;.:ooooollc, ..'';' \n \
+     .':llllccc:;::::ldxxxdol:clllllllllllllollllllodddxx;.:looooollc:..,';; \n \
+     'lcllllccc:coc::ooddddddl:cccllllllllllllllllloddddddc;clllollllc;:::;;. \n \
+     '::lllccccccol:;,'.'''';:c:ccclllllllllccccclol:,,''','';clllllcc::;,;;;. \n \
+      .:llccccc:c;..;. loooo: .:::ccccccccccccc:c:'.:oooo: '. ':cccccc::;,;;;;. \n \
+     .ccccccccc:. ;ll  ;oddo:  ,lc:::cccccc::::ll;  odddo, 'c;..,::cc::;;;;;;,,. \n \
+      ';cc:::cc::'loc ......... :ll:;::::::::loo:  ..','..  lc,.,';;;;;,;,.. \n \
+        ,c::::cll:loc.,;.   ;:,.,ool::::::codddd'.,;.   ,,..olcc:,',,,,,,. \n \
+         ;::::clodool,:c:..'lll:;dxdolloodxxxxxx,:cl:. .cc:,dooolc;,,'. \n \
+          ;::::cldxdd:cclloolllcoxkxxxkkkkkkkkkklllllllllccldxxxdoc,. \n \
+           ';:::coxxxdlcooooooldkkkkkkkOOOOOOOOOkllodxxxdclxxkkxxo' \n \
+             ::::coxxkkxdddddxkkkkkkkkkOOOOOOOOOOOkxddxddkkkkkkxdo \n \
+            .:ooolloxkkkkkkkkkkkkkkkkkkxxkkOOOOOOOOOOkkkkkkkkkxdol. \n \
+           .:;cloodddxxxxxxxkkkkxlccccccccccccllxkkkkxxxxxxxddolc:; \n \
+           :;,';cllloooodddddddddl:::;;;;;;;;::cdddddddddddollc:;,;. \n \
+          ';,'...,:cclllllooooooool;;;;;;;;;;;cooooooooolllc::,..',; \n \
+          ';,,,;;::;llccccllllllllllcc:::::cclllllllccccc::;:;,;,,,; \n \
+   :ll:.lodddddddoo,;lc;;cc::;;::cccccccccccccccc:::;;;,;cl;ooooodooc:,..',' \n \
+ ,::cc;cxxxxddddooc',;lc:lolc:;,''..,;'..';,'',,,;;;:::::c;;odddddddddd,coc; \n \
+.:cccl'dxxxxxddol:,..;:;cloool''',,;:;. .:::;,'..,:cllol;,..;cooddxxxxxl,olllc. \n \
+.llc;:.xxxxxddol:;.,.:':oooool,:c:;,'. ...'',;:c:';llool:;...';cloddxxxo.ooc:' \n \
+   ::,,xxxddolc:;,...,:cllool,;:cccc;,:c::;;:cclldddoool:;''''.,;cloddxo.cc:lc \n \
+   .  ,xddolc:;,,.....;lodxxdoll:lll:;lllc:,clooodxxdool;. ..''..';cllol.;cl' \n \
+      'oolc::;,'.      coodoooooccl:ol;;;:cc:::clloooool      .'....;:c:.... \n \
+      .lcc:::;..      .ooooooodxdl:;;;;;;::oooooooodddoo        ..  ',:' \n \
+      .:;:;;;.'..     ,oooooooxxdl:,;.  .,'';cloxkxddool.   .. ... .',;' \n \
+    ..;::c:'....'.... ,:::;;cc:;,,cl;    ;lc:cc::,,',,'' ...,,..'.':::;;. \n \
+    ..:cccloc'';,...'.  .:cldoolool,.    .;dxxdolclocl;'';,.......cclll;. \n \
+   ....'odxxxxl,...',,.;oooooooooc,,'......,dxdooddxxxo:,;;..,';ldddol,. \n \
+   .    .cdxddoooc::'.':lllodddo:............loooodxocco;.,:looloddxd: \n \
+          .:lodxxxxxxdxxo,.;lddc............';cooc:..,coxxxxxxddoll; \n \
+             .;codxxkxxoc....,::.,;..........;;;;;,...:ccdo:,;;:;'.. \n \
+                 ...,cc:'.:::;;,cc:'.........;;.;;.....;.. \n \
+                       . ..,,,.,;,............'...'.. \n \
+                          .,,''.....       ..',,,,,' \n \
+                           ;:;;,,''.       .'',;;;,' \n \
+                         .:::;,,,''.       .',,;;;;, \n \
+                        '.:c:;'''''.      .''',;::;,. \n \
+                       ,l.,,',;;,...      ..,,..;;.,,. \n \
+                      .co;.clc::,.         ,;:c:..:c:' \n \
+                        . .,,..             .';:,.:;.. \n \
+                                                    .";
 
 function MemberShip() {
   "use client";
 
   return (
-    <p>
-      ホロ: 🌸(メンシ
-      {6 +
-        Math.floor(
-          (new Date().getTime() - new Date("2024-06-10").getTime()) /
-            (30 * 24 * 60 * 60 * 1000)
-        )}
-      ヶ月)
-    </p>
+    <>
+      <div dangerouslySetInnerHTML={{ __html: `<!--\n${nye}\n-->` }} />
+      <p>
+        ホロ: 🌸(メンシ
+        {6 +
+          Math.floor(
+            (new Date().getTime() - new Date("2024-06-10").getTime()) /
+              (30 * 24 * 60 * 60 * 1000)
+          )}
+        ヶ月)
+      </p>
+    </>
   );
 }
 
