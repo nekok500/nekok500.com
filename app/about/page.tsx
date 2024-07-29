@@ -77,7 +77,7 @@ function MemberShip() {
         {6 +
           Math.floor(
             (new Date().getTime() - new Date("2024-06-10").getTime()) /
-              (30 * 24 * 60 * 60 * 1000)
+              (30 * 24 * 60 * 60 * 1000),
           )}
         ヶ月)
       </p>

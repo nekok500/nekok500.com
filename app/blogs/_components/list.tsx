@@ -43,7 +43,8 @@ export default function BlogList({
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 <Link href={`/blogs/category/${post.category.id}`}>
                   {post.category.name}
-                </Link> /
+                </Link>{" "}
+                /
               </p>
               <Link href={`/blogs/${slug}`}>
                 <p className="text-2xl pb-2 font-semibold">{post.title}</p>
@@ -60,7 +61,7 @@ export default function BlogList({
                 <ArticleInfo
                   tags={post.tags}
                   authors={post.authors?.map(
-                    (e) => (Authors as any)[e] as Author
+                    (e) => (Authors as any)[e] as Author,
                   )}
                 />
               </div>

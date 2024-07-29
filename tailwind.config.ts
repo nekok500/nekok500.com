@@ -17,7 +17,7 @@ const config: Config = {
       },
       colors: {
         "true-black": "#000000",
-      }
+      },
     },
   },
   darkMode: "class",

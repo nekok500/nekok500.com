@@ -29,8 +29,8 @@ export async function generateMetadata({
     title: post.title,
     description: post.description,
     robots: {
-      index: post.visible
-    }
+      index: post.visible,
+    },
   } as Metadata;
 
   if (post.eyecatch) {

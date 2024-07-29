@@ -68,7 +68,7 @@ export async function POST(request: Request): Promise<Response> {
     enc.encode(secret),
     alg,
     false,
-    ["verify"]
+    ["verify"],
   );
 
   if (
@@ -76,7 +76,7 @@ export async function POST(request: Request): Promise<Response> {
       alg,
       key,
       Buffer.from(signature, "hex"),
-      bodyBuffer
+      bodyBuffer,
     ))
   )
     return NextResponse.json({
@@ -90,7 +90,7 @@ export async function POST(request: Request): Promise<Response> {
       contents?.new?.publishValue?.createdAt ||
         contents?.new?.draftValue?.createdAt ||
         contents?.old?.publishValue?.createdAt ||
-        contents?.old?.draftValue?.createdAt!
+        contents?.old?.draftValue?.createdAt!,
     )}-${id}`;
 
     console.log(`removeing page caches: ${slug}`);
