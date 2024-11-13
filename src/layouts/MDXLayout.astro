@@ -1,0 +1,10 @@
+---
+import Prose from '../components/Prose.astro'
+import BaseLayout from './BaseLayout.astro'
+---
+
+<BaseLayout pageTitle={Astro.props.frontmatter.title}>
+  <Prose>
+    <slot />
+  </Prose>
+</BaseLayout>
