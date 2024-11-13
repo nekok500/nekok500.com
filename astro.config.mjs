@@ -11,4 +11,7 @@ import react from '@astrojs/react'
 export default defineConfig({
   integrations: [tailwind(), mdx(), react()],
   site: 'https://nekok500.com',
+  redirects: {
+    '/blogs': '/blog',
+  },
 })
