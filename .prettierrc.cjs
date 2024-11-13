@@ -5,13 +5,13 @@ module.exports = {
   printWidth: 80,
   semi: false,
   singleQuote: true,
-  plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
   overrides: [
     {
-      files: "*.astro",
+      files: '*.astro',
       options: {
-        parser: "astro",
+        parser: 'astro',
       },
     },
   ],
-};
+}
