@@ -6,6 +6,7 @@ import {
 
 export type Blog = {
   title: string
+  heading?: string
   content: string
   tags: string[]
 } & MicroCMSContentId &

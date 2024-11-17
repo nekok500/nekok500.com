@@ -21,7 +21,7 @@ const post = await client.get<Blog>({
 })
 ---
 
-<BaseLayout>
+<BaseLayout pageTitle={post.title} heading={post.heading}>
   <div>
     <h1 class="text-4xl font-semibold">{post.title}</h1>
     <p class="flex space-x-4 text-gray-600">

@@ -1,9 +1,8 @@
 ---
 import Header from '../components/Header.astro'
 
-const { pageTitle } = Astro.props
-const fullTitle =
-  'nekok500.com' + (pageTitle !== undefined ? ` - ${pageTitle}` : '')
+const { pageTitle, heading } = Astro.props
+const fullTitle = 'nekok500.com' + (pageTitle && ` - ${pageTitle}`)
 ---
 
 <html lang="ja">
@@ -14,6 +13,7 @@ const fullTitle =
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta property="og:title" content={fullTitle} />
+    {heading && <meta property="og:description" content={heading} />}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <title>{fullTitle}</title>
