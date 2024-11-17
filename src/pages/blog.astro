@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import type { Blog } from '../lib/microcms'
 import { client } from '../lib/microcms'
-import { yyyyMMdd } from '../lib/utils'
+import { toSlug } from '../lib/utils'
 
 const blogs = await client.getList<Blog>({ endpoint: 'blogs' })
 ---
@@ -12,9 +12,7 @@ const blogs = await client.getList<Blog>({ endpoint: 'blogs' })
     {
       blogs.contents.map((c) => (
         <li>
-          <a href={`/blog/${yyyyMMdd(new Date(c.publishedAt!))}-${c.id}`}>
-            {c.title}
-          </a>
+          <a href={`/blog/${toSlug(c)}`}>{c.title}</a>
         </li>
       ))
     }
