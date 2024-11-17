@@ -1,24 +1,30 @@
 ---
+export const prerender = false
+
 import Prose from '../../components/Prose.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { client, type Blog } from '../../lib/microcms'
-import { fromSlug, toSlug } from '../../lib/utils'
+import { toSlug } from '../../lib/utils'
+import { fromSlug } from '../../lib/utils'
 
-export async function getStaticPaths() {
-  return (await client.getAllContents<Blog>({ endpoint: 'blogs' })).map((c) => {
-    return {
-      params: {
-        slug: toSlug(c),
-      },
-    }
+const slug = fromSlug(Astro.params.slug || '')
+
+let post
+try {
+  post = await client.get<Blog>({
+    endpoint: 'blogs',
+    contentId: fromSlug(slug!),
+  })
+} catch (e) {
+  return new Response(null, {
+    status: 404,
   })
 }
-
-const { slug } = Astro.params
-const post = await client.get<Blog>({
-  endpoint: 'blogs',
-  contentId: fromSlug(slug),
-})
+const expectSlug = toSlug(post)
+if (Astro.params.slug !== expectSlug) {
+  return Astro.redirect(`/blog/${expectSlug}`)
+}
+Astro.response.headers.set('cache-control', 'public, max-age=300')
 ---
 
 <BaseLayout pageTitle={post.title} heading={post.heading}>

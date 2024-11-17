@@ -1,9 +1,11 @@
 ---
 import Prose from '../components/Prose.astro'
 import BaseLayout from './BaseLayout.astro'
+
+const { title, heading } = Astro.props
 ---
 
-<BaseLayout pageTitle={Astro.props.frontmatter.title}>
+<BaseLayout pageTitle={title} heading={heading}>
   <Prose>
     <slot />
   </Prose>

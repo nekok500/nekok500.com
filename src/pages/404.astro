@@ -1,0 +1,12 @@
+---
+import MDXLayout from '../layouts/MDXLayout.astro'
+Astro.response.headers.set('cache-control', 'public, max-age=3600')
+---
+
+<MDXLayout
+  title="404 Not found"
+  heading="お探しのページは見つかりませんでした。"
+>
+  <h1>404 Not found</h1>
+  <p>お探しのページは見つかりませんでした。</p>
+</MDXLayout>

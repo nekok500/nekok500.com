@@ -10,5 +10,5 @@ export function toSlug(obj: MicroCMSContentId & MicroCMSDate) {
 }
 
 export function fromSlug(slug: string) {
-  return slug.substring(9)
+  return slug.substring(9) || slug
 }
