@@ -6,11 +6,12 @@ import {
   faGithub,
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import avatar from '../avatar.png'
 ---
 
 <BaseLayout>
   <div class="flex h-full flex-col items-center justify-center">
-    <img class="size-40 rounded-full" src="/public/avatar.png" />
+    <img class="size-40 rounded-full" src={avatar.src} />
     <p class="mt-2 text-3xl font-bold">ねこかわいい</p>
     <p class="text-xl font-semibold text-gray-700">@nekok500</p>
     <div class="mt-8 flex flex-row space-x-4 text-4xl">
