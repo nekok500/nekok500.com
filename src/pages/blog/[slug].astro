@@ -1,0 +1,43 @@
+---
+import Prose from '../../components/Prose.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { client, type Blog } from '../../lib/microcms'
+import { fromSlug, toSlug } from '../../lib/utils'
+
+export async function getStaticPaths() {
+  return (await client.getAllContents<Blog>({ endpoint: 'blogs' })).map((c) => {
+    return {
+      params: {
+        slug: toSlug(c),
+      },
+    }
+  })
+}
+
+const { slug } = Astro.params
+const post = await client.get<Blog>({
+  endpoint: 'blogs',
+  contentId: fromSlug(slug),
+})
+---
+
+<BaseLayout>
+  <div>
+    <h1 class="text-4xl font-semibold">{post.title}</h1>
+    <p class="flex space-x-4 text-gray-600">
+      <span
+        >投稿日時: {new Date(post.publishedAt!).toLocaleString('ja-JP')}</span
+      >
+      {
+        post.publishedAt !== post.updatedAt && (
+          <span>
+            更新日時: {new Date(post.updatedAt!).toLocaleString('ja-JP')}
+          </span>
+        )
+      }
+    </p>
+  </div>
+  <Prose>
+    <div set:html={post.content} />
+  </Prose>
+</BaseLayout>

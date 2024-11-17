@@ -1,9 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import type { Blog } from '../lib/microcms'
+import { client } from '../lib/microcms'
+import { yyyyMMdd } from '../lib/utils'
+
+const blogs = await client.getList<Blog>({ endpoint: 'blogs' })
 ---
 
 <BaseLayout>
-  <div class="flex h-full flex-col items-center justify-center">
-    <h1>そんなものはない</h1>
-  </div>
+  <ul>
+    {
+      blogs.contents.map((c) => (
+        <li>
+          <a href={`/blog/${yyyyMMdd(new Date(c.publishedAt!))}-${c.id}`}>
+            {c.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
