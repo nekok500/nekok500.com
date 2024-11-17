@@ -8,7 +8,8 @@ const blogs = await client.getList<Blog>({ endpoint: 'blogs' })
 ---
 
 <BaseLayout>
-  <ul>
+  <h1 class="text-4xl font-semibold">ブログ一覧</h1>
+  <ul class="mt-2 list-inside list-disc text-lg">
     {
       blogs.contents.map((c) => (
         <li>
