@@ -5,10 +5,24 @@ export function yyyyMMdd(date: Date): string {
 }
 
 export function toSlug(obj: MicroCMSContentId & MicroCMSDate) {
+  console.log(obj.publishedAt)
   const jst = new Date(new Date(obj.publishedAt!).getTime() + 9 * 3600 * 1000) // +9時間
   return `${yyyyMMdd(jst)}-${obj.id}`
 }
 
 export function fromSlug(slug: string) {
   return slug.substring(9)
+}
+
+export function dateStr(date: Date | string): string {
+  if (typeof date === 'string') date = new Date(date)
+
+  return date.toLocaleString('ja-JP', {
+    timeZone: 'Asia/Tokyo',
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
 }
