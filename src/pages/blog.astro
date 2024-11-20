@@ -1,21 +1,14 @@
 ---
-export const prerender = false
-
 import BaseLayout from '../layouts/BaseLayout.astro'
 import type { Blog } from '../lib/microcms'
 import { client } from '../lib/microcms'
 import { toSlug } from '../lib/utils'
 
 const blogs = await client.getList<Blog>({ endpoint: 'blogs' })
-export const blogUrls = blogs.contents.map((c) => {
-  return `/blog/${toSlug(c)}`
-})
-
-Astro.response.headers.set('cache-control', 'public, max-age=300')
 ---
 
 <BaseLayout pageTitle="ブログ一覧">
-  <h1 class="text-4xl font-semibold">ブログ投稿一覧</h1>
+  <h1 class="text-4xl font-semibold">ブログ一覧</h1>
   <ul class="mt-2 list-inside list-disc text-lg">
     {
       blogs.contents.map((c) => (
