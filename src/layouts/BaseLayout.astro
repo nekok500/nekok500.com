@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro'
 
 const { pageTitle, heading } = Astro.props
-const fullTitle = 'nekok500.com' + (pageTitle && ` - ${pageTitle}`)
+const fullTitle = 'nekok500.com' + (pageTitle ? ` - ${pageTitle}` : '')
 ---
 
 <html lang="ja">
