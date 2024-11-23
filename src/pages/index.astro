@@ -10,7 +10,27 @@ import avatar from '../avatar.png'
 ---
 
 <BaseLayout>
-  <div class="flex h-full flex-col items-center justify-center">
+  <div class="flex h-[calc(100vh-148px)] items-center justify-center">
+    <div class="flex flex-col items-center space-y-2">
+      <img class="size-2/4 rounded-full" src={avatar.src} />
+      <div class="flex flex-col items-center">
+        <span class="text-2xl font-semibold">ねこかわいい</span>
+        <span class="text-gray-500">@nekok500</span>
+      </div>
+      <div class="space-x-1 text-4xl">
+        <a href="https://x.com/nekok500"
+          ><FontAwesomeIcon icon={faXTwitter} /></a
+        >
+        <a href="https://github.com/nekok500">
+          <FontAwesomeIcon icon={faGithub} />
+        </a>
+        <a href="https://discord.com/users/586157827400400907">
+          <FontAwesomeIcon icon={faDiscord} />
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="flex h-full flex-col items-center justify-center">
     <img class="size-40 rounded-full" src={avatar.src} />
     <p class="mt-2 text-3xl font-bold">ねこかわいい</p>
     <p class="text-xl font-semibold text-gray-700">@nekok500</p>
@@ -25,7 +45,7 @@ import avatar from '../avatar.png'
         <FontAwesomeIcon icon={faDiscord} />
       </a>
     </div>
-  </div>
+  </div> -->
 </BaseLayout>
 
 <style is:global>

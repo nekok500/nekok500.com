@@ -18,8 +18,10 @@ const fullTitle = 'nekok500.com' + (pageTitle ? ` - ${pageTitle}` : '')
     <meta property="og:url" content={Astro.url} />
     <title>{fullTitle}</title>
   </head>
-  <body class="w-max-screen flex h-screen flex-col p-4 lg:px-20">
-    <Header />
-    <slot class="flex-grow" />
+  <body>
+    <div class="min-h-screen space-y-8 p-8 py-10 md:px-32 lg:px-48">
+      <Header />
+      <slot class="container" />
+    </div>
   </body>
 </html>
