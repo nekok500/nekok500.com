@@ -9,22 +9,32 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import avatar from '../avatar.png'
 ---
 
-<BaseLayout>
+<BaseLayout description="ねこかわいいのポートフォリオ的ななにか">
   <div class="flex h-[calc(100vh-148px)] items-center justify-center">
     <div class="flex flex-col items-center space-y-2">
-      <img class="size-2/4 rounded-full" src={avatar.src} />
+      <img
+        class="size-2/4 rounded-full"
+        src={avatar.src}
+        alt="nekok500's icon"
+      />
       <div class="flex flex-col items-center">
         <span class="text-2xl font-semibold">ねこかわいい</span>
         <span class="text-gray-500">@nekok500</span>
       </div>
       <div class="space-x-1 text-4xl">
-        <a href="https://x.com/nekok500"
+        <a href="https://x.com/nekok500" aria-label="Go to my Twitter profile"
           ><FontAwesomeIcon icon={faXTwitter} /></a
         >
-        <a href="https://github.com/nekok500">
+        <a
+          href="https://github.com/nekok500"
+          aria-label="Go to my GitHub profile"
+        >
           <FontAwesomeIcon icon={faGithub} />
         </a>
-        <a href="https://discord.com/users/586157827400400907">
+        <a
+          href="https://discord.com/users/586157827400400907"
+          aria-label="Go to my Discord profile"
+        >
           <FontAwesomeIcon icon={faDiscord} />
         </a>
       </div>
