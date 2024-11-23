@@ -1,40 +1,42 @@
 ---
-import Prose from '../../components/Prose.astro'
+import { getCollection, getEntry } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import { client, type Blog } from '../../lib/microcms'
-import { dateStr, fromSlug, toSlug } from '../../lib/utils'
+import { dateStr } from '../../lib/utils'
+import Prose from '../../components/Prose.astro'
 
 export async function getStaticPaths() {
-  return (await client.getAllContents<Blog>({ endpoint: 'blogs' })).map((c) => {
-    return {
-      params: {
-        slug: toSlug(c),
-      },
-    }
-  })
+  const blogEntries = await getCollection('blog')
+  return blogEntries.map((e) => ({
+    params: { slug: e.slug },
+    props: { e },
+  }))
 }
 
 const { slug } = Astro.params
-const post = await client.get<Blog>({
-  endpoint: 'blogs',
-  contentId: fromSlug(slug),
-})
+const post = await getEntry('blog', slug)
+const author = await getEntry(post.data.author)
+const { Content } = await post.render()
 ---
 
-<BaseLayout pageTitle={post.title} heading={post.heading}>
+<BaseLayout pageTitle={post.data.title} heading={post.data.heading}>
   <div class="space-y-4">
     <div>
-      <h1 class="text-4xl font-semibold">{post.title}</h1>
-      <p class="flex space-x-4 text-gray-600">
-        <span>投稿日時: {dateStr(post.publishedAt!)}</span>
+      <h1 class="text-4xl font-semibold">{post.data.title}</h1>
+      <div class="flex space-x-4 text-gray-600">
+        <span>投稿日時: {dateStr(post.data.published)}</span>
         {
-          post.publishedAt !== post.updatedAt && (
-            <span>更新日時: {dateStr(post.updatedAt!)}</span>
+          post.data.updated && (
+            <span>更新日時: {dateStr(post.data.updated)}</span>
           )
         }
-      </p>
-    </div>
+        <span class="ml-auto">
+          by {author.data.name}
+        </span>
+      </div>
 
-    <Prose set:html={post.content} />
+      <Prose>
+        <Content />
+      </Prose>
+    </div>
   </div>
 </BaseLayout>

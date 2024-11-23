@@ -1,21 +1,28 @@
 ---
+import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
-import type { Blog } from '../lib/microcms'
-import { client } from '../lib/microcms'
-import { toSlug } from '../lib/utils'
+import { dateStr } from '../lib/utils'
 
-const blogs = await client.getList<Blog>({ endpoint: 'blogs' })
+const posts = await getCollection('blog')
 ---
 
 <BaseLayout pageTitle="ブログ一覧">
-  <h1 class="text-4xl font-semibold">ブログ一覧</h1>
-  <ul class="mt-2 list-inside list-disc text-lg">
+  <div class="flex flex-col space-y-4">
+    <h1 class="text-4xl font-semibold">ブログ一覧</h1>
     {
-      blogs.contents.map((c) => (
-        <li>
-          <a href={`/blog/${toSlug(c)}`}>{c.title}</a>
-        </li>
+      posts.map((e) => (
+        <a href={`/blog/${e.slug}`}>
+          <div class="flex flex-col space-y-2 rounded-md border border-gray-600 px-4 py-2">
+            <span class="text-2xl">{e.data.title}</span>
+            <div class="text-gray-600">
+              <span>投稿日時: {dateStr(e.data.published)}</span>
+              {e.data.updated && (
+                <span>更新日時: {dateStr(e.data.updated)}</span>
+              )}
+            </div>
+          </div>
+        </a>
       ))
     }
-  </ul>
+  </div>
 </BaseLayout>

@@ -15,5 +15,6 @@ export default defineConfig({
   site: 'https://nekok500.com',
   redirects: {
     '/blogs': '/blog',
+    '/blog/20241118-new-blog/': '/blog/created-astro-blog',
   },
 })
