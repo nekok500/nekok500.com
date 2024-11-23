@@ -22,18 +22,19 @@ const post = await client.get<Blog>({
 ---
 
 <BaseLayout pageTitle={post.title} heading={post.heading}>
-  <div>
-    <h1 class="text-4xl font-semibold">{post.title}</h1>
-    <p class="flex space-x-4 text-gray-600">
-      <span>投稿日時: {dateStr(post.publishedAt!)}</span>
-      {
-        post.publishedAt !== post.updatedAt && (
-          <span>更新日時: {dateStr(post.updatedAt!)}</span>
-        )
-      }
-    </p>
+  <div class="space-y-4">
+    <div>
+      <h1 class="text-4xl font-semibold">{post.title}</h1>
+      <p class="flex space-x-4 text-gray-600">
+        <span>投稿日時: {dateStr(post.publishedAt!)}</span>
+        {
+          post.publishedAt !== post.updatedAt && (
+            <span>更新日時: {dateStr(post.updatedAt!)}</span>
+          )
+        }
+      </p>
+    </div>
+
+    <Prose set:html={post.content} />
   </div>
-  <Prose>
-    <div set:html={post.content} />
-  </Prose>
 </BaseLayout>
