@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import { dateStr } from '../lib/utils'
 
-const posts = await getCollection('blog')
+const posts = (await getCollection('blog')).filter(
+  (e) => e.data.draft === false
+)
 ---
 
 <meta name="robots" content="noindex" />

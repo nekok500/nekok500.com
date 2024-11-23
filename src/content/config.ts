@@ -8,6 +8,7 @@ const blog = defineCollection({
     updated: z.date().optional(),
     heading: z.string().optional(),
     author: reference('authors').default('nekok500'),
+    draft: z.boolean().default(false),
   }),
 })
 
