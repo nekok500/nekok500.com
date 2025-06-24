@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import { dateStr } from '../lib/utils'
 
 const posts = (await getCollection('blog')).filter(
-  (e) => e.data.draft === false
+  (e) => e.data.draft === false,
 )
 ---
 
@@ -14,7 +14,7 @@ const posts = (await getCollection('blog')).filter(
     <h1 class="text-4xl font-semibold">ブログ一覧</h1>
     {
       posts.map((e) => (
-        <a href={`/blog/${e.slug}`}>
+        <a href={`/blog/${e.slug}/`}>
           <div class="flex flex-col space-y-2 rounded-md border border-gray-600 px-4 py-2">
             <span class="text-2xl">{e.data.title}</span>
             <div class="text-gray-600">
