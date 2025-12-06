@@ -7,4 +7,4 @@ directory = "./dist"
 
 [[routes]]
 pattern = "nekok500.dev/*"
-zone_id = "265b017b4ca92ecc876c85bf935995fe"
+zone_id = "d922cd7d6c15256d1c5816164aed2c96"
