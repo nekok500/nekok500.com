@@ -14,6 +14,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params
 const post = await getEntry('blog', slug)
+if (!post) throw new Error('Could not find blog post')
 const author = await getEntry(post.data.author)
 const { Content } = await post.render()
 ---
