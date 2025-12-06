@@ -1,0 +1,7 @@
+Contact: mailto:me@nekok500.com
+Contact: https://discord.com/users/586157827400400907
+Contact: https://x.com/nekok500
+Expires: 2026-03-31T23:59:59Z
+
+Preferred-Languages: ja, en
+Canonical: https://nekok500.dev/security.txt

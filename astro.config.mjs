@@ -12,7 +12,7 @@ import sitemap from '@astrojs/sitemap'
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), mdx(), react(), sitemap()],
-  site: 'https://nekok500.com',
+  site: 'https://nekok500.dev',
   redirects: {
     '/blogs': '/blog',
     '/blog/20241118-new-blog/': '/blog/created-astro-blog',

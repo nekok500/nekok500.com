@@ -1,1 +1,1 @@
-# nekok500.com
+# nekok500.dev
